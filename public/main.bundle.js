@@ -184,8 +184,8 @@ var PostcodeService = (function () {
     }
     PostcodeService.prototype.get = function (postcode) {
         console.log('Serving coordinates for', postcode);
-        return this.http.get('assets/outer.json')
-            .map(function (response) { return response.json()[postcode]; });
+        return this.http.get('http://maps.google.com/maps/api/geocode/json?address=' + postcode)
+            .map(function (response) { return response.json().results[0].geometry.location; });
     };
     PostcodeService = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["b" /* Injectable */])(), 
@@ -428,7 +428,6 @@ var MapInputCmp = (function () {
     MapInputCmp.prototype.setView = function (postcode) {
         var _this = this;
         var coordinates;
-        postcode = postcode.toUpperCase();
         this.postcodeService.get(postcode)
             .subscribe(function (data) { return coordinates = data; }, function (error) { return console.error('Error:', error); }, function () { return _this.mymap.setView(coordinates, 13); });
     };
