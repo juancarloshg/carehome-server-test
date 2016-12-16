@@ -184,7 +184,7 @@ var PostcodeService = (function () {
     }
     PostcodeService.prototype.get = function (postcode) {
         console.log('Serving coordinates for', postcode);
-        return this.http.get('http://maps.google.com/maps/api/geocode/json?address=' + postcode)
+        return this.http.get('https://maps.google.com/maps/api/geocode/json?address=' + postcode)
             .map(function (response) { return response.json().results[0].geometry.location; });
     };
     PostcodeService = __decorate([
