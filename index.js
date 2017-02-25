@@ -1,10 +1,12 @@
 var express = require('express');
+var compression = require('compression');
 var fs = require('fs');
 var app = express();
 var path = require('path');
 var port = process.env.PORT || 3000;
 var staticRoot = __dirname + '/public/';
 
+app.use(compression());
 app.use(express.static(staticRoot));
 
 var routes = require('./apiRoutes.js')
